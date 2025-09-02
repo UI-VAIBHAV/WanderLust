@@ -1,5 +1,5 @@
 const List = require("../model/listening.js")
-const ExpressError = require("../utils/ExpressError");
+const ExpressError = require("../utils/expressError");
 
 module.exports.index = async(req,res)=>{
     const listItem = await List.find({});
