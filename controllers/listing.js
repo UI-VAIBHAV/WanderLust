@@ -1,7 +1,5 @@
 const List = require("../model/listening.js")
-const mapToken = process.env.MAP_TOKEN;
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+const ExpressError = require("../utils/ExpressError");
 
 module.exports.index = async(req,res)=>{
     const listItem = await List.find({});
