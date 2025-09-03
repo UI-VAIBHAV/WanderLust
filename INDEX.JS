@@ -38,13 +38,17 @@ main().then(()=>{
 //     await mongoose.connect(dburl);
 // }
 async function main() {
+  try {
     await mongoose.connect(dburl, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,                       // Force TLS
-        tlsAllowInvalidCertificates: false  // Production me false rakhna
+      tls: true,                        // Required for Atlas or SSL-enabled servers
+      tlsAllowInvalidCertificates: false // Keep false for production
     });
+    console.log("✅ MongoDB connected successfully");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+  }
 }
+
 
 const store = MongoStore.create({
     mongoUrl : dburl,
