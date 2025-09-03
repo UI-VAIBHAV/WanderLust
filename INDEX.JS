@@ -94,6 +94,12 @@ app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
 app.use("/", userRouter);
 
+app.get("/", (req, res) => {
+  res.redirect("/listings"); 
+  // OR you can render a homepage view instead:
+  // res.render("home.ejs");
+});
+
 app.use((err,req,res,next)=>{
     let {statuscode=500,message="something went wrong!!"} = err;
     res.status(statuscode).render("error.ejs",{message});
