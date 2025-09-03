@@ -34,8 +34,16 @@ main().then(()=>{
 }).catch((err)=>{
     console.log(err);
 })
-async function main(){
-    await mongoose.connect(dburl);
+// async function main(){
+//     await mongoose.connect(dburl);
+// }
+async function main() {
+    await mongoose.connect(dburl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        tls: true,                       // Force TLS
+        tlsAllowInvalidCertificates: false  // Production me false rakhna
+    });
 }
 
 const store = MongoStore.create({
@@ -46,15 +54,16 @@ const store = MongoStore.create({
     touchAfter : 24*3600
 })
 
-store.on("error",()=>{
-    console.log("error in mongo session store",err)
-})
+
+store.on("error", (err) => {
+    console.log("Error in mongo session store:", err);
+});
 
 const sessionOptions ={
     store,
     secret: process.env.SECRET,
     resave: false,
-    saveUnintialized: true,
+    saveUninitialized: true,
     cookie:{
         expires: Date.now()+7*24*60*60*1000,
         maxAge: 7*24*60*60*1000,

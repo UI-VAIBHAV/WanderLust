@@ -16,7 +16,7 @@
   .search-inp{
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 </style>
 
@@ -38,11 +38,11 @@
 </div>
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
-          <% if(!currUser) {%>
+          <% if(!locals.currUser) {%>
             <a class="nav-link active" aria-current="page" href="/signup"><b>Sign Up</b></a>
             <a class="nav-link" href="/login"><b>Login</b></a>
           <%}%>
-          <% if(currUser) {%>
+          <% if(locals.currUser) {%>
             <a class="nav-link" href="/logout"><b>Log Out</b></a>
           <%}%>
       </div>
